@@ -33,3 +33,8 @@ npm install date-fns
 ```
 node server.js
 ```
+
+### Open your web browser and go to
+```
+localhost:3000
+```
