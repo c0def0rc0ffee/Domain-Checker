@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Domain Checker</title>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var socket = io();
+
+    document.getElementById('startButton').addEventListener('click', function() {
+      socket.emit('start checking domains');
+    });
+
+    socket.on('checking domain', function(domain) {
+      document.getElementById('status').innerText = 'Checking: ' + domain;
+    });
+
+    socket.on('domain status', function(message) {
+      var p = document.createElement('p');
+      p.innerText = message;
+      document.body.appendChild(p);
+    });
+
+    socket.on('checking finished', function(message) {
+      document.getElementById('status').innerText = message;
+    });
+  });
+</script>
+</head>
+<body>
+<h2>Domain Checker</h2>
+<button id="startButton">Start Checking Domains</button>
+<div id="status">Ready to check domains.</div>
+</body>
+</html>
